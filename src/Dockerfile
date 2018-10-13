@@ -4,7 +4,7 @@
 FROM ubuntu
 
 # Default Meteor version if not defined at build time; see ../build.sh
-ARG METEOR_VERSION=1.6
+ARG METEOR_VERSION=1.8
 
 ENV SCRIPTS_FOLDER /docker
 ENV APP_SOURCE_FOLDER /opt/src
@@ -28,12 +28,6 @@ RUN curl https://install.meteor.com --output /tmp/install-meteor.sh && \
 # Fix permissions warning; https://github.com/meteor/meteor/issues/7959
 ENV METEOR_ALLOW_SUPERUSER true
 
-
-# Copy entrypoint and dependencies
-COPY ./docker $SCRIPTS_FOLDER/
-
-# Install entrypoint dependencies
-RUN cd $SCRIPTS_FOLDER && \
-	meteor npm install
+RUN npm install -g meteor-build-client
 
 # No ONBUILD lines, because this is intended to be used by your app’s multistage Dockerfile and you might need control of the sequence of steps using files from this image
