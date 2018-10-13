@@ -13,7 +13,12 @@ ENV APP_BUNDLE_FOLDER /opt/bundle
 # Install dependencies, based on https://github.com/jshimko/meteor-launchpad/blob/master/scripts/install-deps.sh (only the parts we plan to use)
 RUN apt-get update && \
 	apt-get install --assume-yes apt-transport-https ca-certificates && \
-	apt-get install --assume-yes --no-install-recommends build-essential bsdtar bzip2 curl git python
+	apt-get install --assume-yes --no-install-recommends build-essential bsdtar bzip2 curl git python && \
+	apt-get install -y build-essential
+
+# Install node
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
 
 # Install Meteor
 RUN curl https://install.meteor.com --output /tmp/install-meteor.sh && \
