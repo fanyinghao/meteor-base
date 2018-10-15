@@ -18,7 +18,7 @@ RUN apt-get update && \
 
 # Install node
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
+RUN apt-get install -y nodejs
 
 # Install Meteor
 RUN curl https://install.meteor.com --output /tmp/install-meteor.sh && \
